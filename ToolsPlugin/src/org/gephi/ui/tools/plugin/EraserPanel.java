@@ -36,6 +36,7 @@ public class EraserPanel extends javax.swing.JPanel {
 
         labelWeight = new javax.swing.JLabel();
         sizeSpinner = new javax.swing.JSpinner();
+        statusLabel = new javax.swing.JLabel();
 
         labelWeight.setFont(labelWeight.getFont().deriveFont((float)10));
         labelWeight.setText(org.openide.util.NbBundle.getMessage(EraserPanel.class, "EraserPanel.labelWeight.text")); // NOI18N
@@ -43,12 +44,17 @@ public class EraserPanel extends javax.swing.JPanel {
         sizeSpinner.setFont(sizeSpinner.getFont().deriveFont((float)10));
         sizeSpinner.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(1.0f), Float.valueOf(0.0f), null, Float.valueOf(0.1f)));
 
+        statusLabel.setFont(statusLabel.getFont().deriveFont((float)10));
+        statusLabel.setText(org.openide.util.NbBundle.getMessage(EraserPanel.class, "EraserPanel.statusLabel.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 240, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(statusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(labelWeight)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -58,12 +64,14 @@ public class EraserPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel labelWeight;
     private javax.swing.JSpinner sizeSpinner;
+    private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
 }

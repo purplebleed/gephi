@@ -8,9 +8,7 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import org.gephi.graph.api.Graph;
-import org.gephi.graph.api.GraphController;
-import org.gephi.graph.api.Node;
+import org.gephi.graph.api.*;
 import org.gephi.tools.spi.*;
 import org.gephi.ui.tools.plugin.EraserPanel;
 import org.openide.util.Lookup;
@@ -27,12 +25,10 @@ public class Eraser implements Tool {
     private ToolEventListener[] listeners;
     private EraserPanel eraserpanel;
     //Settings
-    private Color color;
     private float size;
 
     public Eraser() {
         //Default settings
-        color = new Color(153, 153, 153);//Default gray of nodes
         size = 10f;
     }
 
@@ -46,22 +42,14 @@ public class Eraser implements Tool {
 
     public ToolEventListener[] getListeners() {
         listeners = new ToolEventListener[1];
-        listeners[0] = new MouseClickEventListener() {
+        listeners[0] = new NodeClickEventListener() {
 
-            public void mouseClick(int[] positionViewport, float[] position3d) {
-                color = new Color(153, 153, 153);
-                size = eraserpanel.getEraserSize();
+            public void clickNodes(Node[] nodes) {
+                Node n = nodes[0];
                 GraphController gc = Lookup.getDefault().lookup(GraphController.class);
                 Graph graph = gc.getModel().getGraph();
-                Node node = gc.getModel().factory().newNode();
-                node.getNodeData().setX(position3d[0]);
-                node.getNodeData().setY(position3d[1]);
-                node.getNodeData().setSize(size);
-                node.getNodeData().setR(color.getRed() / 255f);
-                node.getNodeData().setG(color.getGreen() / 255f);
-                node.getNodeData().setB(color.getBlue() / 255f);
-                graph.addNode(node);
-            }
+                graph.removeNode(n);
+           }
         };
         return listeners;
     }
@@ -76,7 +64,7 @@ public class Eraser implements Tool {
             }
 
             public String getName() {
-                return NbBundle.getMessage(NodePencil.class, "Eraser.name");
+                return NbBundle.getMessage(Eraser.class, "Eraser.name");
             }
 
             public Icon getIcon() {
@@ -84,7 +72,7 @@ public class Eraser implements Tool {
             }
 
             public String getDescription() {
-                return NbBundle.getMessage(NodePencil.class, "Eraser.description");
+                return NbBundle.getMessage(Eraser.class, "Eraser.description");
             }
 
             public int getPosition() {
@@ -94,6 +82,6 @@ public class Eraser implements Tool {
     }
 
     public ToolSelectionType getSelectionType() {
-        return ToolSelectionType.NONE;
+        return ToolSelectionType.SELECTION;
     }
 }
